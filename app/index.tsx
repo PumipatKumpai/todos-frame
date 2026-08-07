@@ -2,6 +2,7 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from 'react';
 import { Alert, FlatList, Text, View } from "react-native";
 import AddTodo from "./addTodo";
+import Card from "./components/card";
 
 export default function Index() {
   const  db  = useSQLiteContext();
@@ -34,17 +35,16 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <AddTodo />
+      <AddTodo refresh={getTodos} />
       <FlatList
         data={todos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={{ padding: 10 }}>
-            <Text>{item.title}</Text>
-          </View>
+          <Card todo={item} refresh={getTodos} />
         )}
         ListEmptyComponent={() => (
-          <View style={{ padding: 10,
+          <View style={{ 
+            padding: 10,
             fontSize: 28,
           }}>
             <Text>No todos found.</Text>

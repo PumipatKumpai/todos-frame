@@ -2,20 +2,26 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useState } from 'react';
 import { Alert, Button, TextInput, View } from 'react-native';
 
-export default function AddTodo() {
+export default function AddTodo(props) {
+  const [title, setTitle] = useState('');
+
   const db = useSQLiteContext();
-  const [title, setTitle] = useState<string>('');
-  const completed = 0; // Default value for completed
 
     const addTodo = async () => {
+        const trimmedTitle = title.trim();
+        if (!trimmedTitle) {
+            Alert.alert('Please enter a todo title.');
+            return;
+        }
+
         try {
-            await db.execAsync(`INSERT INTO todos (title, completed) VALUES (?, ?)`, [{title}, completed]);
+            let query = "INSERT INTO todos (title, completed) VALUES (?, ?);";
+            await db.runAsync(query, [title, 0]);
             setTitle('');
-            Alert.alert('Todo added successfully!');
+            props.refresh();
         }
         catch (err) {
             Alert.alert(err.message);
-            console.error(err.message);
         }
     };
 
