@@ -46,7 +46,10 @@ export default function Card(props) {
   }
 
   return (
-    <View style={[styles.container, {backgroundColor: todo.completed?'#BBB':'#47F'}]} key={todo.id}>
+    <View key={todo.id} 
+          style={[styles.container, 
+                {backgroundColor: 
+                  todo.completed?'#BBB':'#47F'}]}>
       <View>
         <Text style={styles.text}>{todo.title}</Text>
       </View>
@@ -62,7 +65,7 @@ export default function Card(props) {
         </TouchableOpacity>
         <TouchableOpacity onPress={removeTodo}>
           <FontAwesome name="trash" size={24} color='#F88'
-            style={{marginLeft: 20}} />
+            style={{marginLeft: 15}} />
         </TouchableOpacity>
       </View>
     </View>

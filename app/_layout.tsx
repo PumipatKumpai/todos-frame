@@ -15,9 +15,12 @@ export default function RootLayout() {
         databaseName="stdphones.db"
         onInit={createTable}
         options={{ useNewConnection: false}}>
-      <Stack>
-        <Stack.Screen name="index" options={{ title: 'Todos' }} />
-        <Stack.Screen name="addTodo" options={{ title: 'Add Todo' }} />
+      <Stack screenOptions={{
+        headerStyle: {backgroundColor: '#6AF'},
+        headerTintColor: 'white'
+      }}>
+        <Stack.Screen name="index" 
+            options={{ title: 'Mobile App Todos List' }} />
       </Stack>
     </SQLiteProvider>
   );
