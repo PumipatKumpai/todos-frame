@@ -1,6 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
 import { useState } from 'react';
-import { Alert, Button, TextInput, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function AddTodo(props) {
   const [title, setTitle] = useState('');
@@ -33,7 +33,9 @@ export default function AddTodo(props) {
         value={title}
         onChangeText={(text) => setTitle(text) }
       />
-      <Button title="Add Todo" onPress={addTodo} />
+      <TouchableOpacity onPress={addTodo}>
+        <Text style={styles.button}>New Todo</Text>
+      </TouchableOpacity>
 
     </View>
   );
@@ -43,12 +45,20 @@ const styles = {
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 20,
+        margin: 10,
     },
     input: {
         flex: 1,    
         borderColor: 'gray',
         borderWidth: 1,
         padding: 10,
+        borderRadius: 10,
+        marginHorizontal: 5,
+    },
+    button: {
+      backgroundColor: 'green',
+      color: 'white',
+      padding: 10,
+      borderRadius: 5,
     }
 }

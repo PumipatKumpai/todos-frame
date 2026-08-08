@@ -28,29 +28,36 @@ export default function Index() {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={styles.container}>
       <AddTodo refresh={getTodos} />
-      <FlatList
+      <FlatList style={styles.list}
         data={todos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Card todo={item} refresh={getTodos} />
+            <Card todo={item} refresh={getTodos} />
         )}
         ListEmptyComponent={() => (
-          <View style={{ 
-            padding: 10,
-            fontSize: 28,
-          }}>
-            <Text>No todos found.</Text>
+          <View style={styles.empty}>
+            <Text style={{fontSize: 28, textAlign: 'center'}}>No todos found.</Text>
           </View>
         )}
       />  
     </View>
   );
+}
+
+const styles = {
+  container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+  },
+  list: {
+    width: '95%',
+  },
+  empty: {
+            margin: 10, 
+            padding: 10,
+            backgroundColor: '#DDD',
+  }
 }
